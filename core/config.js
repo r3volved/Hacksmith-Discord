@@ -4,25 +4,25 @@ var settings = {
     TABLE_ID : '1',
     
     //Bot token
-    token : '',
+    token : 'NTI4NjcxMjgyNDA1ODM0NzYz.XsSd5Q.jB0nmnR8MqKCV7uvPpwX_hCyCKA',
     
     //Bot Command Prefix @@
-    prefix : '',
+    prefix : '.',
     
     //Main Owner of bot (does not get affected by cooldowns ETC)
-    master : '',
+    master : '305465187799007232',
     
     //Main server the bot interacts with
-    mainserverid : '',
+    mainserverid : '647131994701955095',
     
     //where to place log events
-    mainlogchannel : '',
+    mainlogchannel : '647277579656757258',
 
     //Announcements and such > like player join
-    announcementchannel : '',
+    announcementchannel : '647277579656757258',
 
     //Role that allows other users to do commands
-    member_role : '',
+    member_role : '647277901707870208',
 
     //ID of the bot - Depends on the token used
     botself_id : '',
@@ -33,7 +33,8 @@ var settings = {
     //IP of your MQTT server
     mqttip : '',
 
-    //Extra Settings to load - Embeds mostly
+    //Extra Settings to load
+    //Embeds mostly
     //set the server name
     servername : '',
     //set a url for logo image 200x200 (or close)
@@ -55,7 +56,7 @@ module.exports = {
         const settings_database = new sqlite3.Database(file); 
 
         //Build sql query
-        const sql = `SELECT * FROM settings WHERE TABLE_ID = ${settings.TABLE_ID};`
+        const sql = `SELECT * FROM settings WHERE TABLE_ID = ${JSON.stringify(settings.TABLE_ID)};`
 
         //TODO...
         
@@ -81,10 +82,11 @@ module.exports = {
         //Build sql query
         const fields = Object.keys(new_settings)
         const values = fields.reduce((accumulator, field) => {
-            accumulator.push(`${field}=${JSON.stringify(fields[field])}`)
+            //Stringify the value so strings are quoted
+            accumulator.push(`${field}=${JSON.stringify(new_settings[field])}`)
             return accumulator            
         },[])
-        const sql = `INSERT INTO settings (${fields.join(",")}) WHERE TABLE_ID = ${new_settings.TABLE_ID} UPDATE ${values.join(",")};`
+        const sql = `INSERT INTO settings (${fields.join(",")}) WHERE TABLE_ID = ${JSON.stringify(new_settings.TABLE_ID)} UPDATE ${values.join(",")};`
 
         //TODO...
         

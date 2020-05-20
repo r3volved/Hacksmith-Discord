@@ -17,10 +17,20 @@ Random Notes:
 - Bot core (helpers and clients)  : /core
 - Bot data (databases and json)   : /data
 
+### Data
 
-## Commands
+Store any databases, or json, or global assets to /data
 
-### Structure
+### Core
+
+Core modules contained in /core with each file managing a specific client
+
+- Settings manager      : /core/config.js 
+- Discord manager       : /core/discord.js 
+- MQTT Device manager   : /core/mqtt.js 
+- Websocket manager     : /core/websocket.js 
+
+### Commands
 
 Commands contained in /commands with each folder named for command use
 
@@ -37,6 +47,8 @@ Validation should be the first step within each command (if validation is necess
 
 
 ## Process helpers
+
+See demo command for demonstrations
 
 ### Config helper
 

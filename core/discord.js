@@ -1,3 +1,5 @@
+/** THIS WILL BE MODIFIED BASED ON DISCORD EVENTS YOU WNAT TO TRACK **/
+
 //Return the current time as localeString
 function event_time () {
     let eventtime = new Date();
@@ -7,6 +9,7 @@ function event_time () {
 module.exports = function ( settings, commands, clients ) {
 
     //Require the discord library and instansiate a new client
+    //THIS IS A THIRD PARTY LIBRARY
     const Discord = require("discord.js"); //Capital letter Exception
     const client = new Discord.Client();  //Capital letter Exception
 
@@ -30,10 +33,12 @@ module.exports = function ( settings, commands, clients ) {
     client.on("ready", () => {
 
 	    //General Bot information into botlog
-	    console.log(`Bot is online`, event_time())
+	    console.log(`Connected to Discord as ${client.user.tag}`)
 	    console.log(`- Prefix is "${settings.prefix}"`)
 	    console.log(`- ${client.users.cache.size} user(s)`)
 	    console.log(`- ${client.guilds.cache.size} server(s)`)
+	    console.log(`- Available clients : ${Object.keys(clients).join(", ")}`)
+	    console.log(`- Available commands : ${Object.keys(commands).join(", ")}`)
 
 	    //Sets bot activity and status
 	    client.user.setPresence(presence); 
@@ -121,7 +126,7 @@ module.exports = function ( settings, commands, clients ) {
 	
         try {
             
-    	    //Run the command - pass the message, bot settings and clients manager
+    	    //Run the command - pass the message and the bot settings
             await commands[command_name]( message, settings )
 
         } catch(err) {
@@ -138,8 +143,7 @@ module.exports = function ( settings, commands, clients ) {
     
     
     //Trigger initial login
-    console.log('Connecting to discord');
-	return client.login(settings.token);    
+	return client.login(settings.token).catch(console.error);    
 
 }
 
