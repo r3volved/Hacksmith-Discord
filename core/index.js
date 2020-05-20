@@ -12,7 +12,7 @@ module.exports = core_modules.reduce((accumulator, item) => {
     if( !item.endsWith('.js') ) return accumulator
     
     //If this is a readme, return the accumulator (ignore)
-    if( !item.endsWith('.md') ) return accumulator
+    if( item.endsWith('.md') ) return accumulator
 
     //If this is a file, attach to accumulator and require it
     const name = item.slice(0, item.length-3)
