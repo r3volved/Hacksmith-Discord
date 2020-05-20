@@ -12,7 +12,7 @@ module.exports = commands.reduce((accumulator, command) => {
     if( command.endsWith('.js') ) return accumulator
 
     //If this is a readme, return the accumulator (ignore)
-    if( !command.endsWith('.md') ) return accumulator
+    if( command.endsWith('.md') ) return accumulator
 
     //If this is a folder, attach to accumulator and require it
     accumulator[command] = require(`${__dirname}/${command}`)
